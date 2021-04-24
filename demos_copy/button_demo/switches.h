@@ -6,7 +6,7 @@
 #define S3 BIT2 // switch2 is p2.2
 #define S4 BIT3 // switch2 is p2.3
 
-#define SWITCHES  S1, S2, S3, S4		/* only 4 switches on this board */
+#define SWITCHES  (S1 | S2 | S3| S4)		/* only 4 switches on this board */
 
 void switch_init();
 void switch_interrupt_handler();

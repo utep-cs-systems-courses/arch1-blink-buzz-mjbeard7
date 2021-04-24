@@ -2,7 +2,7 @@
 #include "stateMachines.h"
 #include "led.h"
 #include "buzzer.h"
-
+#include "switches.h"
 
 void state_advance()		/* alternate between toggling red & green */
 {
@@ -12,13 +12,13 @@ void state_advance()		/* alternate between toggling red & green */
   static char state = 0;
 
   switch(state){
-  case 0: red_on = 0; green_on = 0; state++; break;
+  case 0: red_on = 0; green_on = 1; state++; break;
   case 1: red_on = 1; green_on = 0; state++; break;
-  case 2: red_on = 0; green_on = 0; state++; break;
+  case 2: red_on = 0; green_on = 1; state++; break;
   case 3: red_on = 1; green_on = 0; state++; break;
-  case 4: red_on = 0; green_on = 0; state++; break;  
-  case 5: red_on = 0; green_on = 1; state++; break;
-  case 6: red_on = 0; green_on = 0; state++; break;
+  case 4: red_on = 0; green_on = 1; state++; break;  
+  case 5: red_on = 1; green_on = 0; state++; break;
+  case 6: red_on = 1; green_on = 1; state++; break;
   case 7: red_on = 0; green_on = 1; state++; break;
   case 8: red_on = 0; green_on = 0; state++; break;
   case 9: red_on = 1; green_on = 0; state++; break;
@@ -32,6 +32,7 @@ void state_advance()		/* alternate between toggling red & green */
 }
 void buzzer_state_advance(){
   static char buzz_state = 0;
+  static char buzz_state_2 = 0;
   switch(buzz_state) {
   case 0: buzzer_set_period(4049); buzz_state++;break;
   case 1: buzzer_set_period(4545); buzz_state++;break;
@@ -49,5 +50,9 @@ void buzzer_state_advance(){
   case 12: buzzer_set_period(3405); buzz_state++;break;
   case 13: buzzer_set_period(4545); buzz_state=0;break;
   default: buzz_state = 0;  
-  }//end of switch
+  }//end of switch buzz state
+  /* switch(buzz_state_2) {
+  case 0: buzzer_set_period(4049); buzz_state++;break;
+  default: buzz_state = 0;*/
+  // }//end of switch buzz state 2
 }//end of buzz state advance
